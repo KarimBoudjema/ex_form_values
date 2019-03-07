@@ -1,0 +1,4 @@
+services:
+  ex_form_values.myservices:
+    class: Drupal\ex_form_values\MyServices
+    arguments: ['@messenger', '@http_client', '@string_translation']

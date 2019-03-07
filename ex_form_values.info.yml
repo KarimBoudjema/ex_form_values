@@ -1,0 +1,5 @@
+name: 'ExFormValues'
+type: module
+description: 'Demostrate different ways to get values from a form'
+core: 8.x
+package: 'Custom'

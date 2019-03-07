@@ -1,0 +1,15 @@
+ex_form_values.with_store_form:
+  path: '/ex_form_values/form/myform'
+  defaults:
+    _form: '\Drupal\ex_form_values\Form\WithStoreForm'
+    _title: 'A form with PrivateTempStore'
+  requirements:
+    _access: 'TRUE'
+
+ex_form_values.simple_controller_show_item:
+  path: '/ex_form_values/showitem'
+  defaults:
+    _controller: '\Drupal\ex_form_values\Controller\SimpleController::showRssItems'
+    _title: 'Simple Controller with PrivateTempStore'
+  requirements:
+    _permission: 'access content'
