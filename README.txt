@@ -15,10 +15,11 @@ a link to each syndicated page.
 This module has two main parts:
 
 1. A form (WithStoreForm.php) to collect the URL of the RSS file and the
-number of items retrieve from. This form will redirect the user the
-controller.
+number of items retrieve from. We save those values in a private tempstore 
+collection and then we redirect the user the controller.
 
-2. A controller to display a list of items from the RSS file introduced
+2. A controller to retrieve the form's values for this user from the private
+tempstore and display a list of items from the RSS file introduced
 in the previous form.
 
 We'll also use custom service with several methods for getting items from
