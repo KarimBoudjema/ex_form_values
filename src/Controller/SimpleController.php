@@ -117,11 +117,7 @@ class SimpleController extends ControllerBase {
     $build[]['message'] = [
       '#type' => 'markup',
       '#markup' => t("Url: @url - Items: @items", ['@url' => $url, '@items' => $items]),
-      '#cache' => [
-        'tags' => [
-          'myform',
-        ],
-      ],
+
     ];
 
     // 4. Get the items from the rss file in a renderable array.
@@ -137,6 +133,8 @@ class SimpleController extends ControllerBase {
       '#url' => URL::fromRoute('ex_form_values.with_store_form'),
     ];
 
+    // Prevent the rendered array from being cached.
+    $build['#cache']['max-age'] = 0;
     // 6. Render the array.
     return $build;
   }

@@ -126,32 +126,27 @@ class WithStoreForm extends FormBase {
   /**
    * Submit the form and redirect to a controller.
    *
-   * 1. Invalidate the cache of the render array of the target controller
-   * 2. Save the values of the form into the $params array
-   * 3. Create a PrivateTempStore object
-   * 4. Store the $params array in the PrivateTempStore object
-   * 5. Redirect to the controller for processing.
+   * 1. Save the values of the form into the $params array
+   * 2. Create a PrivateTempStore object
+   * 3. Store the $params array in the PrivateTempStore object
+   * 4. Redirect to the controller for processing.
    *
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    // 1. Invalidate the cache of the render array of the controller
-    // for anonymous users.
-    $this->cacheTagsInvalidator->invalidateTags(['myform']);
-
-    // 2. Set the $params array with the values of the form
+    // 1. Set the $params array with the values of the form
     // to save those values in the store.
     $params['url'] = $form_state->getValue('url');
     $params['items'] = $form_state->getValue('items');
 
-    // 3. Create a PrivateTempStore object with the collection 'ex_form_values'.
+    // 2. Create a PrivateTempStore object with the collection 'ex_form_values'.
     $tempstore = $this->tempStoreFactory->get('ex_form_values');
 
-    // 4. Store the $params array with the key 'params'.
+    // 3. Store the $params array with the key 'params'.
     try {
       $tempstore->set('params', $params);
-      // 5. Redirect to the simple controller.
+      // 4. Redirect to the simple controller.
       $form_state->setRedirect('ex_form_values.simple_controller_show_item');
     }
     catch (\Exception $error) {
