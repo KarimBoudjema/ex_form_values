@@ -8,7 +8,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
-use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
 
 /**
@@ -36,13 +35,6 @@ class WithStoreForm extends FormBase {
   protected $loggerFactory;
 
   /**
-   * Drupal\Core\Cache\CacheTagsInvalidatorInterface definition.
-   *
-   * @var \Drupal\Core\Cache\CacheTagsInvalidatorInterface
-   */
-  private $cacheTagsInvalidator;
-
-  /**
    * Drupal\Core\TempStore\PrivateTempStoreFactory definition.
    *
    * @var \Drupal\Core\TempStore\PrivateTempStoreFactory
@@ -55,12 +47,10 @@ class WithStoreForm extends FormBase {
   public function __construct(
     MessengerInterface $messenger,
     LoggerChannelFactoryInterface $logger_factory,
-    CacheTagsInvalidatorInterface $cacheTagsInvalidator,
     PrivateTempStoreFactory $tempStoreFactory
   ) {
     $this->messenger = $messenger;
     $this->loggerFactory = $logger_factory;
-    $this->cacheTagsInvalidator = $cacheTagsInvalidator;
     $this->tempStoreFactory = $tempStoreFactory;
   }
 
@@ -71,7 +61,6 @@ class WithStoreForm extends FormBase {
     return new static(
       $container->get('messenger'),
       $container->get('logger.factory'),
-      $container->get('cache_tags.invalidator'),
       $container->get('tempstore.private')
     );
   }
